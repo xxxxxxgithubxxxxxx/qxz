@@ -1,6 +1,6 @@
 <template>
 
-	<div >
+	<div id="box">
 		<ul>
 			<router-link to='?type=0&page=0' activeClass='active' tag='li'><b>全部</b></router-link>
 			<router-link to='?type=1&page=0' activeClass='active' tag='li'><b>知识</b></router-link>
@@ -29,6 +29,9 @@
 </script>
 
 <style lang="scss" scoped>
+	.box{
+		font-size: 0.12rem;
+	}
 	ul{
 		list-style: none;
 		display: flex;
