@@ -30,26 +30,27 @@
 	</script>
 	<style lang="scss" scoped type="text/css">
 		div{
-			width:500px;
+			font-size: 0.12rem;
+			width:2.5rem;
 			height:100%;
 			position: fixed;
-			top: 50px;
-			left: 0px;
+			top: 0.25rem;
+			left: 0;
 			background:#282828;
 			color: #000;
 			ul{
 				li{
 					list-style: none;
-					height:50px;
-					line-height: 50px;
+					height:0.25rem;
+					line-height: 0.25rem;
 					color:#9a9a9a;
-					border-top: 1px dotted #333;
-					padding-left: 10px;
+					border-top: 0rem dotted #333;
+					padding-left: 0.25rem;
 				}
 			}
 		}
 		i{
-			margin-right:5px;
+			margin-right:0.02rem;
 		}
 		.active{
 			background:red;

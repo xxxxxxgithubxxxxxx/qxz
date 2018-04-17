@@ -59,6 +59,7 @@ li{
 	list-style:none;
 }
 	div{
+		font-size: 0.12rem;
 		ul{
 			display: flex;
 			justify-content:space-around; 

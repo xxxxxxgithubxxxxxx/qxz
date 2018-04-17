@@ -30,6 +30,7 @@
 	</script>
 	<style lang="scss" scoped type="text/css">
 		div{
+			font-size: 0.12rem;
 			background: yellow;
 		}
 	</style>

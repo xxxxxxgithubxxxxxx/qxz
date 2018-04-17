@@ -25,8 +25,9 @@
 	</script>
 	<style lang="scss" scoped type="text/css" >
 		nav{
-			height: 50px;
-			line-height: 50px;
+			font-size: 0.12rem;
+			height: 0.25rem;
+			line-height: 0.12rem;
 			background: #282828;
 			color: #fff;
 			position: fixed;

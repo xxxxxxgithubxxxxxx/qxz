@@ -30,18 +30,21 @@ export default {
 </script>
 
 <style lang="scss" scoped type="text/css">
+/*	html{
+		font-size: 31.25vw;
+	}*/
   *{
-    margin: 0px;
+    margin: 0px;	
     padding:0px;
   }
   footer{
-    margin-top: 50px;
+    margin-top:0.25rem;
   }
   .fade-enter-active, .fade-leave-active {
     transition: all .5s;
   }
   .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
     opacity: 0;
-    transform: translatex(-100px);
+    transform: translatex(-0.5rem);
   }
 </style>
