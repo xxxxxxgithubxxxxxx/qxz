@@ -11,15 +11,12 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-/*          '/v4': {
-              target: 'https://m.maizuo.com',
-              host: 'm.maizuo.com',
+           '/api': {
+              target: 'http://www.imxingzhe.com',
+              host: 'http://www.imxingzhe.com',
               changeOrigin:true,
-              // pathRewrite: {
-              //     '^/v4/api': '/v4/api'
-              //   }
           }
-*/         /* '/restapi/': {
+                   /* '/restapi/': {
               target: 'https://www.ele.me',
               host: 'www.ele.me',
               changeOrigin:true,
