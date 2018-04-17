@@ -11,12 +11,12 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-           '/api': {
-              target: 'http://www.imxingzhe.com',
-              host: 'http://www.imxingzhe.com',
-              changeOrigin:true,
-          }
-                   /* '/restapi/': {
+    	'/api': {
+    		target: 'http://www.imxingzhe.com',
+    		host: 'http://www.imxingzhe.com',
+    		changeOrigin: true,
+    	}
+        /* '/restapi/': {
               target: 'https://www.ele.me',
               host: 'www.ele.me',
               changeOrigin:true,
