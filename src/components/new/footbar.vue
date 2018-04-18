@@ -1,7 +1,6 @@
 <template>
 	<div id="box">
-		
-		<router-view></router-view> 
+		footbar
 	</div>
 </template>
 
@@ -12,7 +11,4 @@
 </script>
 
 <style>
-	#box{
-		font-size: 0.12rem;
-	}
 </style>

@@ -1,18 +1,14 @@
 <template>
 	<div id="box">
-		
-		<router-view></router-view> 
+		navbar
 	</div>
 </template>
 
 <script>
-	export default{
+	export default {
 		
 	}
 </script>
 
 <style>
-	#box{
-		font-size: 0.12rem;
-	}
 </style>

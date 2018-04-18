@@ -12,9 +12,7 @@
 			
 		</ul>
 		<router-view></router-view>
-		<div>
-			<img src="../assets/logo.png"/>
-		</div>
+		
 	</div>
 </template>
 
@@ -31,7 +29,7 @@
 
 <style lang="scss" scoped>
 	
-	ul{
+	#navall{
 		list-style: none;
 		display: flex;
 		box-shadow: 0rem 0.04rem 0.04rem #dddddd;

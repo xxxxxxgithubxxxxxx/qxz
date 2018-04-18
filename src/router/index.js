@@ -110,6 +110,7 @@ export default new Router({
     		{
     			path:'login',
     			component: ren('login'),
+    			
     		},
     		{
     			path:'register',
