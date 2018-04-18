@@ -5,8 +5,8 @@
 			</div>
 
 			<div class="right">
-				<span>登录</span>
-				<span>注册</span>
+				<router-link tag='span' to='/user/login'>登录</router-link>
+				<router-link tag='span' to='/user/register'>注册</router-link>
 				<!-- <i class="iconfont icon-account"></i> -->
 			</div>
 		</nav>

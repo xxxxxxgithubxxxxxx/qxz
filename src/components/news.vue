@@ -30,25 +30,23 @@
 </script>
 
 <style lang="scss" scoped>
-	.box{
-		font-size: 0.12rem;
-	}
+	
 	ul{
 		list-style: none;
 		display: flex;
-		box-shadow: 0px 4px 4px #dddddd;
+		box-shadow: 0rem 0.04rem 0.04rem #dddddd;
 		li{
 			cursor: pointer;
 			float: left;
 			flex: 1;
-			height: 38px;
+			height: 0.38rem;
 			text-align: center;
-			line-height: 38px;
-			font-size: 16px;
+			line-height: 0.38rem;
+			font-size: 0.16rem;
 		}
 	}
 	.active{
-		border-bottom: 4px solid #189adb;
+		border-bottom: 0.08rem solid #189ADB;
 	}
 </style>
 

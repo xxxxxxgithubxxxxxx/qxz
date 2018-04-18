@@ -1,6 +1,6 @@
 <template>
 	<div id="">
-		all
+		login
 	</div>
 </template>
 
@@ -8,7 +8,4 @@
 </script>
 
 <style>
-	div{
-		font-size: 0.08rem;
-	}
 </style>

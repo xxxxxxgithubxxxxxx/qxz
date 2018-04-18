@@ -103,6 +103,20 @@ export default new Router({
     		title:'行者,'
     	}
     },
+    {
+    	path:'/user',
+    	component: include('user'),
+    	children:[
+    		{
+    			path:'login',
+    			component: ren('login'),
+    		},
+    		{
+    			path:'register',
+    			component: ren('register'),
+    		},
+    	]
+    },
     {   
       path:'*',
       redirect:"/home"   //从定向
