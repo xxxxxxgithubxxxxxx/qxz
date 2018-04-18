@@ -10,15 +10,24 @@
 			<router-link to='news/rw' tag='li' activeClass='active'><b>人物</b></router-link>
 			<router-link to='news/ss' tag='li' activeClass='active'><b>赛事</b></router-link>-->
 			
-			<li @click="zujian='aiguo_all'" class="active"><b>全部</b></li>
-			<li @click="zujian='aiguo_yundong'"><b>知识</b></li>
-			<li @click="zujian='aiguo_jiaoyi'"><b>产品</b></li>
-			<li @click="zujian='aiguo_taolun'"><b>新闻</b></li>
-			<li @click="zujian='aiguo_youwen'"><b>人物</b></li>
-			<li @click="zujian='aiguo_youwen'"><b>赛事</b></li>
-			
+			<!--<li @click="zujian='all'" class="active"><a href="/news/?type=0&page=0"><b>全部</b></a></li>
+			<li @click="zujian='zs'"><a href="/news/?type=1&page=0"><b>知识</b></a></li>
+			<li @click="zujian='cp'"><a href="/news/?type=2&page=0"><b>产品</b></a></li>-->
+			<li @click="zujian='all'"><b>全部</b></li>
+			<li @click="zujian='zs'"><b>知识</b></li>
+			<li @click="zujian='cp'"><b>产品</b></li>
+			<li @click="zujian='xw'"><b>新闻</b></li>
+			<li @click="zujian='rw'"><b>人物</b></li>
+			<li @click="zujian='ss'"><b>赛事</b></li>
+			<!--<li @click="zujian='aiguo_all'" class="active" ><a href="/news/?type=0&page=0"><b>全部</b></a></li>
+			<li @click="zujian='aiguo_yundong'" clsaa="active"><a href="/news/?type=1&page=0"><b>知识</b></a></li>
+			<li @click="zujian='aiguo_all'" class="active" ><a href="/news/?type=0&page=0"><b>产品</b></a></li>
+			<li @click="zujian='aiguo_yundong'"><a href="/news/?type=1&page=0"><b>知识</b></a></li>
+			<li @click="zujian='aiguo_all'" class="active" v-show="isShow"><a href="/news/?type=0&page=0"><b>全部</b></a></li>
+			<li @click="zujian='aiguo_yundong'"><a href="/news/?type=1&page=0"><b>知识</b></a></li>-->
 		</ul>
-		<router-view></router-view>
+		<component :is='zujian'></component>
+		<router-view kerwin=""></router-view>
 		
 	</div>
 </template>
@@ -35,6 +44,8 @@ import ss from '../components/new/ss';
 	export default{
 		data(){
 			return {
+				isShow:true,
+				zujian:all
 			}
 		},
 		components:{
@@ -67,6 +78,10 @@ import ss from '../components/new/ss';
 			text-align: center;
 			line-height: 0.36rem;
 			font-size: 0.14rem;
+			a{
+				text-decoration: none;
+				color: black;
+			}
 		}
 	}
 	.active{

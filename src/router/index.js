@@ -52,32 +52,32 @@ export default new Router({
     	mete:{
     		title:'新闻,'
     	},
-    	children:[
-    		{
-    			path:'all',
-		    	component: ren('all'),
-    		},
-    		{
-    			path:'cp',
-		    	component: ren('cp'),
-    		},
-    		{
-    			path:'rw',
-		    	component: ren('rw'),
-    		},
-    		{
-    			path:'ss',
-		    	component: ren('ss'),
-    		},
-    		{
-    			path:'xw',
-		    	component: ren('xw'),
-    		},
-    		{
-    			path:'zs',
-		    	component: ren('zs'),
-    		},
-    	]
+//  	children:[
+//  		{
+//  			path:'all',
+//		    	component: ren('all'),
+//  		},
+//  		{
+//  			path:'cp',
+//		    	component: ren('cp'),
+//  		},
+//  		{
+//  			path:'rw',
+//		    	component: ren('rw'),
+//  		},
+//  		{
+//  			path:'ss',
+//		    	component: ren('ss'),
+//  		},
+//  		{
+//  			path:'xw',
+//		    	component: ren('xw'),
+//  		},
+//  		{
+//  			path:'zs',
+//		    	component: ren('zs'),
+//  		},
+//  	]
     },
     {
     	path:'/help',
