@@ -12,7 +12,6 @@
 			<li @click="zujian='aiguo_taolun'">装备讨论</li>
 			<li @click="zujian='aiguo_youwen'">有问必答</li>
 		</ul>
-		<!--<aiguo_jiaoyi></aiguo_jiaoyi>-->
 		<div class="div1">
 		<component :is="zujian"></component>
 		</div>
