@@ -1,16 +1,17 @@
 <template>
 
 	<div id="box">
-		<ul>
-			<router-link to='?type=0&page=0' activeClass='active' tag='li'><b>全部</b></router-link>
-			<router-link to='?type=1&page=0' activeClass='active' tag='li'><b>知识</b></router-link>
-			<router-link to='?type=2&page=0' activeClass='active' tag='li'><b>产品</b></router-link>
-			<router-link to='?type=3&page=0' activeClass='active' tag='li'><b>新闻</b></router-link>
-			<router-link to='?type=4&page=0' activeClass='active' tag='li'><b>人物</b></router-link>
-			<router-link to='?type=5&page=0' activeClass='active' tag='li'><b>赛事</b></router-link> 
+		<ul id="navall">
+			
+			<router-link to='news/all' tag='li' activeClass='active'><b>全部</b></router-link>
+			<router-link to='news/zs' tag='li' activeClass='active'><b>知识</b></router-link>
+			<router-link to='news/cp' tag='li' activeClass='active'><b>产品</b></router-link>
+			<router-link to='news/xw' tag='li' activeClass='active'><b>新闻</b></router-link>
+			<router-link to='news/rw' tag='li' activeClass='active'><b>人物</b></router-link>
+			<router-link to='news/ss' tag='li' activeClass='active'><b>赛事</b></router-link>
 			
 		</ul>
-		<!--<component :is=''></component>-->
+		<router-view></router-view>
 		<div>
 			<img src="../assets/logo.png"/>
 		</div>
@@ -19,12 +20,12 @@
 
 <script>
 
+
 	export default{
 		data(){
 			return {
-				
 			}
-		}
+		},
 	}
 </script>
 
@@ -37,6 +38,7 @@
 		display: flex;
 		box-shadow: 0px 4px 4px #dddddd;
 		li{
+			cursor: pointer;
 			float: left;
 			flex: 1;
 			height: 38px;

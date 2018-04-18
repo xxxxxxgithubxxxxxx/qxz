@@ -1,15 +1,17 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-//import HelloXqz from '../components/HelloXqz'
-
 function include(path) {
 return () => import('@/components/' + path)
+}
+function ren(path) {
+return () => import('@/components/new/' + path)
 }
 Vue.use(Router)
 
 
 
 export default new Router({
+	mode:'history',
   routes: [
     {
     	path:'/home',
@@ -49,7 +51,33 @@ export default new Router({
     	component: include('news'),
     	mete:{
     		title:'新闻,'
-    	}
+    	},
+    	children:[
+    		{
+    			path:'all',
+		    	component: ren('all'),
+    		},
+    		{
+    			path:'cp',
+		    	component: ren('cp'),
+    		},
+    		{
+    			path:'rw',
+		    	component: ren('rw'),
+    		},
+    		{
+    			path:'ss',
+		    	component: ren('ss'),
+    		},
+    		{
+    			path:'xw',
+		    	component: ren('xw'),
+    		},
+    		{
+    			path:'zs',
+		    	component: ren('zs'),
+    		},
+    	]
     },
     {
     	path:'/help',
