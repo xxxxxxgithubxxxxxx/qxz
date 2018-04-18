@@ -27,7 +27,7 @@
 		nav{
 			font-size: 0.12rem;
 			height: 0.25rem;
-			line-height: 0.12rem;
+			line-height: 0.25rem;
 			background: #282828;
 			color: #fff;
 			position: fixed;

@@ -12,10 +12,11 @@
 			<li @click="zujian='aiguo_taolun'">装备讨论</li>
 			<li @click="zujian='aiguo_youwen'">有问必答</li>
 		</ul>
+		<!--<aiguo_jiaoyi></aiguo_jiaoyi>-->
+		<div class="div1">
 		<component :is="zujian"></component>
+		</div>
 		<router-view></router-view>
-		<!-- {{zujian}} -->
-
 	</div>
 </template>	
 <script>
@@ -35,9 +36,6 @@ export default{
 
 	},
 	methods:{
-		/*hello(){
-			console.log("nihao");
-		}*/
 	},
 	components:{
 	aiguo_all,
@@ -55,17 +53,29 @@ $(function(){
 })
 </script>
 <style lang="scss" scoped type="text/css">
-li{
-	list-style:none;
-}
+	li{
+		list-style:none;
+	}
 	div{
 		font-size: 0.12rem;
-		ul{
+		#ul1{
+			position:fixed;
+			
+			width: 100%;
+			height: 0.2rem;
+			line-height: 0.2rem;
 			display: flex;
+			left: 0;
+			top: 0.25rem;
 			justify-content:space-around; 
+			background:#fff;
+			border-bottom:1px #ccc solid;
 			li{
 
 			}
+		}
+		.div1{
+			padding-top:0.2rem;
 		}
 	}
 
