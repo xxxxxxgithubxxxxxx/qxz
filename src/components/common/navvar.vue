@@ -34,11 +34,16 @@
 			width: 100%;
 			top: 0;
 			left:0;
+			box-sizing: border-box;
+			padding: 0 0.1rem;
 			div:nth-of-type(1){
 				float: left;
 			}
 			div:nth-of-type(2){
 				float:right;
+				span{
+					margin-left: 0.1rem;
+				}
 			}
 		}
 	</style> 
