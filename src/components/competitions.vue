@@ -12,7 +12,7 @@
 		<dd class="list_time"><span>时间：2018-01-12</span><span>地点：江苏省苏州市</span></dd>
 		<dd class="list_keyword"><span>跑步</span><span>休闲</span><span>风景好</span></dd>
 		<dd class="list_recommend">行者推荐</dd>
-		<dd class="list_enroll">行者报 x名</dd>
+		<dd class="list_enroll">行者报名</dd>
 	</dl>
 </div>
 </template>
