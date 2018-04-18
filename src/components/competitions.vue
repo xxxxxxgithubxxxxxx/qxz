@@ -42,7 +42,6 @@ export default{
 		display: block;
 	}
 	#top_list{
-		
 		width:100%;
 		overflow: hidden;
 		display:flex;
