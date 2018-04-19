@@ -1,6 +1,5 @@
 <template>
 	<div id="bg_box">
-		
 	<ul id="top_list">
 		<li>行者报名</li>
 		<li>骑行</li>
@@ -14,10 +13,9 @@
 		>
 		<dl id="conntent_lest" 
 		v-for="data,i in datalist" 
-		@click="go_list(data.id)"
-		>
+		@click="go_list(data.id)">
 		<dt><img :src='data.pic_url'></dt>
-		<dd class="list_title"><span>{{data.title}}{{num}}</span><span class="com_type_false" v-if="data.com_type">未报名</span><span class="com_type_true" v-else>报名中</span></dd>
+		<dd class="list_title"><span>{{data.title}}</span><span class="com_type_false" v-if="data.com_type">未报名</span><span class="com_type_true" v-else>报名中</span></dd>
 		<dd class="list_time"><span >时间：{{
 			gettime(data.end_time)
 		}}</span><span>地点：{{
@@ -31,12 +29,8 @@
 	</div>
 </div>
 </template>
-
-
-
 <script>
 import axios from "axios";
-import Vue from "vue";
 export default{
 	data(){
 		return{
@@ -53,8 +47,8 @@ export default{
 		
 	},
 	methods:{
-		go_list(x){
-			console.log(x)
+		go_list(data_id){
+			this.$router.push(`/competitions_details?id=${data_id}`);
 		},
 		gettime:function(x){
 			var d = new Date(x);
@@ -84,8 +78,6 @@ export default{
 				this.datalist=res.data.data;
 				this.datalist=[...old_datalist,...this.datalist];
 				this.i++;
-				console.log(this.i);
-				console.log(this.url);
 				if(res.data.data.length==0){
 					this.loading=true;
 					this.jiazai="没有跟多数据"
@@ -97,9 +89,7 @@ export default{
 		}
 	},
 	computed:{
-		num:function(){
-			return this.aaaa++;
-		}
+		
 	}
 } 
 </script>
