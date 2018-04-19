@@ -1,6 +1,6 @@
 <template>
 	<div id="">
-		detail
+		detail11
 	</div>
 </template>
 
