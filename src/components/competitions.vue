@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div id="bg_box">
 		
 	<ul id="top_list">
 		<li>行者报名</li>
@@ -7,12 +7,63 @@
 		<li>越野跑</li>
 		<li>徒步</li>
 	</ul>
-	<dl id="conntent_lest" v-for="data,i in datalist">
+	<dl id="conntent_lest" v-for="data,i in datalist" @click="go_list(data.id)">
 		<dt><img :src='data.pic_url'></dt>
-		<dd class="list_title"><span>{{data.title}}</span><span class="com_type_false" v-if="data.com_type">未报名</span><span class="com_type_true" v-else>报名中</span></dd>
+		<dd class="list_title"><span>{{data.title}}{{num}}</span><span class="com_type_false" v-if="data.com_type">未报名</span><span class="com_type_true" v-else>报名中</span></dd>
 		<dd class="list_time"><span >时间：{{
-			(function(x){
-				var d = new Date(x);
+			gettime(data.end_time)
+		}}</span><span>地点：{{
+			data.host_place.length<2?data.host_place[0]:data.host_place[data.host_place.length-1]+"&nbsp"+data.host_place[data.host_place.length-2]
+			}}</span></dd>
+		<dd class="list_keyword"><span>{{data.com_sport_type}}</span><span v-for="keyword in data.tags">{{keyword}}</span></dd>
+		<dd class="list_recommend" v-if="data.top"> 行者推荐</dd>
+		<dd class="list_enroll" v-if="data.top_index">行者报名</dd>
+	</dl>
+</div>
+</template>
+
+
+
+<script>
+import axios from "axios";
+import Vue from "vue";
+//import { InfiniteScroll } from 'mint-ui';
+//Vue.use(InfiniteScroll);
+
+
+//mint下拉获取数据
+//loadMore(){
+//this.loading = true;
+//setTimeout(() => {
+//  let last = this.list[this.list.length - 1];
+//  for (let i = 1; i <= 10; i++) {
+//    this.list.push(last + i);
+//  }
+//  this.loading = false;
+//}, 2500);
+//}
+
+export default{
+	data(){
+		return{
+			datalist:[],
+			aaaa:1
+		}
+	},
+	mounted(){
+		//ajax请求
+		axios.get("/api/v4/competitions_processing/?limit=500&page=0").then(res=>{
+			this.datalist=res.data.data;
+		}).catch(err=>{
+			console.log(err);
+		})
+	},
+	methods:{
+		go_list(x){
+			console.log(x)
+		},
+		gettime:function(x){
+			var d = new Date(x);
 		      var Y = d.getFullYear();
 		      var M = d.getMonth()+1;
 		      if (M<=9) {
@@ -26,36 +77,14 @@
 		      }else{
 		        day = day;
 		      }
-		       return Y+'-'+M+'-'+day;
-			}(data.end_time))
-		}}</span><span>地点：{{
-			data.host_place.length<2?data.host_place[0]:data.host_place[data.host_place.length-1]+"&nbsp"+data.host_place[data.host_place.length-2]
-			}}</span></dd>
-		<dd class="list_keyword"><span>{{data.com_sport_type}}</span><span v-for="keyword in data.tags">{{keyword}}</span></dd>
-		<dd class="list_recommend" v-if="data.top"> 行者推荐</dd>
-		<dd class="list_enroll" v-if="data.top_index">行者报名</dd>
-	</dl>
-</div>
-</template>
-<script>
-import axios from "axios";
-export default{
-	data(){
-		return{
-			datalist:[],
+		    return Y+'-'+M+'-'+day;
 		}
-	},
-	computed:{
 		
 	},
-	mounted(){
-		//ajax请求
-		axios.get("/api/v4/competitions_processing/?limit=500&page=0").then(res=>{
-			this.datalist=res.data.data;
-			console.log(res.data.data[0].end_time);
-		}).catch(err=>{
-			console.log(err);
-		})
+	computed:{
+		num:function(){
+			return this.aaaa++;
+		}
 	}
 } 
 </script>

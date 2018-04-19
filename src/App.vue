@@ -15,6 +15,7 @@
 <script>
 import navvar from './components/common/navvar';
 import sidbar from './components/common/sidbar';
+
 export default {
   data(){
     return{
