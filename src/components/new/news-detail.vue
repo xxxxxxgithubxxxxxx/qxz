@@ -1,6 +1,6 @@
 <template>
-	<div id="">
-		detail11
+	<div id="box">
+		detail11----等着
 	</div>
 </template>
 
@@ -15,4 +15,7 @@
 </script>
 
 <style>
+	#box{
+		font-size: 0.24rem;
+	}
 </style>

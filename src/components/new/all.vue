@@ -1,8 +1,9 @@
 <template>
 	<div id="box">
 		<ul id="conntent_List">
-			<li id="show" v-for="data in datalist" >
-				<img :src="data.pic_url.split(';').slice(0,1)"/>
+			<li id="show" v-for="data in datalist" @click="hellowdist(data.id)">
+				
+				<img :src="data.pic_url.split(';').slice(0,1)" />
 				<div id="content">
 					<p id="title">
 						{{data.title}}
@@ -40,7 +41,13 @@
 				
 			}).catch(err=>{
 				console.log(err)
-			})
+			});
+		},
+		methods:{
+			hellowdist(id){
+				console.log(id);
+				this.$router.push(`/detail?id=${id}`)
+			}
 		}
 	}
 	

@@ -62,6 +62,15 @@ export default new Router({
 
     },
     {
+    	path:'/detail',
+    	name:'dateil',
+    	component: ren('news-detail'),
+    	mete:{
+    		title:'新闻,'
+    	},
+
+    },
+    {
     	path:'/help',
     	name:'help',
     	component: include('help'),
@@ -79,8 +88,8 @@ export default new Router({
     	}
     },
 //  {
-//  	path:'detail',
-//		component: include('news-detail'),
+//  	path:'/detail',
+//		component: ren('news-detail'),
 //  },
     {
     	path:'/feng',
