@@ -7,7 +7,15 @@
 		<li>越野跑</li>
 		<li>徒步</li>
 	</ul>
-	<dl id="conntent_lest" v-for="data,i in datalist" @click="go_list(data.id)">
+	<div
+		v-infinite-scroll="loadMore"
+	  	infinite-scroll-disabled="loading"
+	 	infinite-scroll-distance="20"
+		>
+		<dl id="conntent_lest" 
+		v-for="data,i in datalist" 
+		@click="go_list(data.id)"
+		>
 		<dt><img :src='data.pic_url'></dt>
 		<dd class="list_title"><span>{{data.title}}{{num}}</span><span class="com_type_false" v-if="data.com_type">未报名</span><span class="com_type_true" v-else>报名中</span></dd>
 		<dd class="list_time"><span >时间：{{
@@ -19,6 +27,8 @@
 		<dd class="list_recommend" v-if="data.top"> 行者推荐</dd>
 		<dd class="list_enroll" v-if="data.top_index">行者报名</dd>
 	</dl>
+	<p class="jiazai">{{jiazai}}</p>
+	</div>
 </div>
 </template>
 
@@ -27,36 +37,20 @@
 <script>
 import axios from "axios";
 import Vue from "vue";
-//import { InfiniteScroll } from 'mint-ui';
-//Vue.use(InfiniteScroll);
-
-
-//mint下拉获取数据
-//loadMore(){
-//this.loading = true;
-//setTimeout(() => {
-//  let last = this.list[this.list.length - 1];
-//  for (let i = 1; i <= 10; i++) {
-//    this.list.push(last + i);
-//  }
-//  this.loading = false;
-//}, 2500);
-//}
-
 export default{
 	data(){
 		return{
 			datalist:[],
-			aaaa:1
+			aaaa:1,
+			loading:false,
+			i:0,
+			url:null,
+			jiazai:"数据加载中...."
 		}
 	},
 	mounted(){
 		//ajax请求
-		axios.get("/api/v4/competitions_processing/?limit=500&page=0").then(res=>{
-			this.datalist=res.data.data;
-		}).catch(err=>{
-			console.log(err);
-		})
+		
 	},
 	methods:{
 		go_list(x){
@@ -78,8 +72,29 @@ export default{
 		        day = day;
 		      }
 		    return Y+'-'+M+'-'+day;
+		},
+		loadMore() {
+			var old_datalist=this.datalist;
+			if(old_datalist.length){
+				this.url="/api/v4/competitions_done/?limit=10&page="+this.i
+			}else{
+				this.url="/api/v4/competitions_processing/?limit=500&page=0";
+			}
+			axios.get(this.url).then(res=>{
+				this.datalist=res.data.data;
+				this.datalist=[...old_datalist,...this.datalist];
+				this.i++;
+				console.log(this.i);
+				console.log(this.url);
+				if(res.data.data.length==0){
+					this.loading=true;
+					this.jiazai="没有跟多数据"
+				}
+			}).catch(err=>{
+				console.log(err);
+			})
+			
 		}
-		
 	},
 	computed:{
 		num:function(){
@@ -108,18 +123,29 @@ export default{
 		overflow: hidden;
 		display:flex;
 		justify-content:space-around;
-		height:0.3rem;
-		
+		height:0.325rem;
 		li{
-
 			font-size: 0.125rem;
 			width:20%;
 			color: #fff;
-			background-image:url("https://static.imxingzhe.com/tuchuangupload/1517974438.jpg");
-			background-size:0.74rem;
-			line-height:0.3rem;
+			background-size:100%;
+			line-height:0.325rem;
 			text-align: center;
 		}
+		li:nth-of-type(1){
+			background-image:url("https://static.imxingzhe.com/tuchuangupload/1517974438.jpg");
+		}
+		li:nth-of-type(2){
+			background-image:url("https://static.imxingzhe.com/tuchuangupload/1517974583.jpg");
+		}
+		li:nth-of-type(3){
+			background-image:url("https://static.imxingzhe.com/tuchuangupload/1520327726.jpg");
+		}
+		li:nth-of-type(4){
+			background-image:url("https://static.imxingzhe.com/tuchuangupload/1518001917.jpg");
+		}
+		
+		
 	}
 	#conntent_lest{
 		position: relative;
@@ -208,5 +234,9 @@ export default{
 			border-top-left-radius: 0.1rem;
 			border-bottom-left-radius: 0.1rem;
 		}
+	}
+	.jiazai{
+		color: #999999;
+		font-size: 0.06rem;
 	}
 </style>
