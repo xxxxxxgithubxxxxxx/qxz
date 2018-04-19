@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div id="bg_box">
 		
 	<ul id="top_list">
 		<li>行者报名</li>
@@ -7,12 +7,57 @@
 		<li>越野跑</li>
 		<li>徒步</li>
 	</ul>
-	<dl id="conntent_lest" v-for="data,i in datalist">
+	<div
+		v-infinite-scroll="loadMore"
+	  	infinite-scroll-disabled="loading"
+	 	infinite-scroll-distance="20"
+		>
+		<dl id="conntent_lest" 
+		v-for="data,i in datalist" 
+		@click="go_list(data.id)"
+		>
 		<dt><img :src='data.pic_url'></dt>
-		<dd class="list_title"><span>{{data.title}}</span><span class="com_type_false" v-if="data.com_type">未报名</span><span class="com_type_true" v-else>报名中</span></dd>
+		<dd class="list_title"><span>{{data.title}}{{num}}</span><span class="com_type_false" v-if="data.com_type">未报名</span><span class="com_type_true" v-else>报名中</span></dd>
 		<dd class="list_time"><span >时间：{{
-			(function(x){
-				var d = new Date(x);
+			gettime(data.end_time)
+		}}</span><span>地点：{{
+			data.host_place.length<2?data.host_place[0]:data.host_place[data.host_place.length-1]+"&nbsp"+data.host_place[data.host_place.length-2]
+			}}</span></dd>
+		<dd class="list_keyword"><span>{{data.com_sport_type}}</span><span v-for="keyword in data.tags">{{keyword}}</span></dd>
+		<dd class="list_recommend" v-if="data.top"> 行者推荐</dd>
+		<dd class="list_enroll" v-if="data.top_index">行者报名</dd>
+	</dl>
+	<p class="jiazai">{{jiazai}}</p>
+	</div>
+</div>
+</template>
+
+
+
+<script>
+import axios from "axios";
+import Vue from "vue";
+export default{
+	data(){
+		return{
+			datalist:[],
+			aaaa:1,
+			loading:false,
+			i:0,
+			url:null,
+			jiazai:"数据加载中...."
+		}
+	},
+	mounted(){
+		//ajax请求
+		
+	},
+	methods:{
+		go_list(x){
+			console.log(x)
+		},
+		gettime:function(x){
+			var d = new Date(x);
 		      var Y = d.getFullYear();
 		      var M = d.getMonth()+1;
 		      if (M<=9) {
@@ -26,36 +71,35 @@
 		      }else{
 		        day = day;
 		      }
-		       return Y+'-'+M+'-'+day;
-			}(data.end_time))
-		}}</span><span>地点：{{
-			data.host_place.length<2?data.host_place[0]:data.host_place[data.host_place.length-1]+"&nbsp"+data.host_place[data.host_place.length-2]
-			}}</span></dd>
-		<dd class="list_keyword"><span>{{data.com_sport_type}}</span><span v-for="keyword in data.tags">{{keyword}}</span></dd>
-		<dd class="list_recommend" v-if="data.top"> 行者推荐</dd>
-		<dd class="list_enroll" v-if="data.top_index">行者报名</dd>
-	</dl>
-</div>
-</template>
-<script>
-import axios from "axios";
-export default{
-	data(){
-		return{
-			datalist:[],
+		    return Y+'-'+M+'-'+day;
+		},
+		loadMore() {
+			var old_datalist=this.datalist;
+			if(old_datalist.length){
+				this.url="/api/v4/competitions_done/?limit=10&page="+this.i
+			}else{
+				this.url="/api/v4/competitions_processing/?limit=500&page=0";
+			}
+			axios.get(this.url).then(res=>{
+				this.datalist=res.data.data;
+				this.datalist=[...old_datalist,...this.datalist];
+				this.i++;
+				console.log(this.i);
+				console.log(this.url);
+				if(res.data.data.length==0){
+					this.loading=true;
+					this.jiazai="没有跟多数据"
+				}
+			}).catch(err=>{
+				console.log(err);
+			})
+			
 		}
 	},
 	computed:{
-		
-	},
-	mounted(){
-		//ajax请求
-		axios.get("/api/v4/competitions_processing/?limit=500&page=0").then(res=>{
-			this.datalist=res.data.data;
-			console.log(res.data.data[0].end_time);
-		}).catch(err=>{
-			console.log(err);
-		})
+		num:function(){
+			return this.aaaa++;
+		}
 	}
 } 
 </script>
@@ -79,18 +123,29 @@ export default{
 		overflow: hidden;
 		display:flex;
 		justify-content:space-around;
-		height:0.3rem;
-		
+		height:0.325rem;
 		li{
-
 			font-size: 0.125rem;
 			width:20%;
 			color: #fff;
-			background-image:url("https://static.imxingzhe.com/tuchuangupload/1517974438.jpg");
-			background-size:0.74rem;
-			line-height:0.3rem;
+			background-size:100%;
+			line-height:0.325rem;
 			text-align: center;
 		}
+		li:nth-of-type(1){
+			background-image:url("https://static.imxingzhe.com/tuchuangupload/1517974438.jpg");
+		}
+		li:nth-of-type(2){
+			background-image:url("https://static.imxingzhe.com/tuchuangupload/1517974583.jpg");
+		}
+		li:nth-of-type(3){
+			background-image:url("https://static.imxingzhe.com/tuchuangupload/1520327726.jpg");
+		}
+		li:nth-of-type(4){
+			background-image:url("https://static.imxingzhe.com/tuchuangupload/1518001917.jpg");
+		}
+		
+		
 	}
 	#conntent_lest{
 		position: relative;
@@ -179,5 +234,9 @@ export default{
 			border-top-left-radius: 0.1rem;
 			border-bottom-left-radius: 0.1rem;
 		}
+	}
+	.jiazai{
+		color: #999999;
+		font-size: 0.06rem;
 	}
 </style>
