@@ -27,7 +27,7 @@
 		computed: {
 
 		},
-		mounted() {
+		mounted(){
 			axios.get("/api/v4/new_get_topics?start=0&count=10&channel_id=12").then(res => {
 //				console.log(res.data);
 				//				console.log(res.data.pic_url.split(';'),111);

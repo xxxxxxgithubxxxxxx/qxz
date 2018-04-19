@@ -13,6 +13,7 @@
 			<!--<li @click="zujian='all'" class="active"><a href="/news/?type=0&page=0"><b>全部</b></a></li>
 			<li @click="zujian='zs'"><a href="/news/?type=1&page=0"><b>知识</b></a></li>
 			<li @click="zujian='cp'"><a href="/news/?type=2&page=0"><b>产品</b></a></li>-->
+			<!--<router-link activeClass='active' tag="li" @click="zujian='all'"><b>全部</b></router-link>-->
 			<li @click="zujian='all'"><b>全部</b></li>
 			<li @click="zujian='zs'"><b>知识</b></li>
 			<li @click="zujian='cp'"><b>产品</b></li>
@@ -58,15 +59,17 @@ import ss from '../components/new/ss';
 	  }
 	}
 	$(function(){
-	$("li").click(function(){
+	$("#navall li").click(function(){
 		$(this).addClass("active").siblings().removeClass("active");
 	});
 })
 </script>
 
 <style lang="scss" scoped>
-	
-	#navall{
+	ul{
+		position: fixed;
+		top: 0.25rem;
+		left: 0rem;
 		list-style: none;
 		display: flex;
 		box-shadow: 0rem 0.04rem 0.04rem #dddddd;
@@ -83,6 +86,7 @@ import ss from '../components/new/ss';
 				color: black;
 			}
 		}
+		
 	}
 	.active{
 		border-bottom: 0.03rem solid #189ADB;

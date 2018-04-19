@@ -1,40 +1,24 @@
 <template>
 	<div id="box">
 		<ul id="conntent_List">
-			<li id="show">
-				<img src="../../assets/qxz.jpg"/>
+			<li id="show" v-for="data in datalist">
+				<img :src="data.pic_url.split(';').slice(0,1)"/>
 				<div id="content">
 					<p id="title">
-						浙江竟有这样美的地方，感觉我的车白骑了
+						{{data.title}}
 					</p>
 					<p id="user-bo">
 						<span>
-							kerwin
+							{{data.user.username}}
 						</span>
 						<span id="updata_time">
-							2018.04.17
+							{{data.create_time}}
 						</span>
 					</p>
 				</div>
 				
 			</li>
-			<li id="show">
-				<img src="../../assets/qxz.jpg"/>
-				<div id="content">
-					<p id="title">
-						浙江竟有这样美的地方，感觉我的车白骑了
-					</p>
-					<p id="user-bo">
-						<span >
-							kerwin
-						</span>
-						<span id="updata_time">
-							2018.04.17
-						</span>
-					</p>
-				</div>
-				
-			</li>
+			
 		</ul>
 	</div>
 </template>
@@ -44,11 +28,15 @@
 	export default {
 		data(){
 			return {
+				datalist:[],
+				
 			}
 		},
 		mounted(){
-			axios.get("/api/v4/new_get_topics?start=0&count=10&channel_id=0").then(res=>{
+			axios.get("/api/v4/new_get_topics?start=0&count=10&channel_id=0").then(res => {
+				this.datalist = res.data;
 				console.log(res)
+				
 			}).catch(err=>{
 				console.log(err)
 			})
@@ -83,9 +71,13 @@
 				height: 0.7rem;
 				#user-bo{
 					color: #cecece;
-					margin-top: 0.2rem;
+					margin-top: 0.36rem;
+					#username{
+						font-size: 0.02rem;
+					};
 					#updata_time{
 						float: right;
+						font-size: 0.04rem;
 					}
 				}
 			}
