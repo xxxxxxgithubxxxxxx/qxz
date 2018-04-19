@@ -52,32 +52,7 @@ export default new Router({
     	mete:{
     		title:'新闻,'
     	},
-//  	children:[
-//  		{
-//  			path:'all',
-//		    	component: ren('all'),
-//  		},
-//  		{
-//  			path:'cp',
-//		    	component: ren('cp'),
-//  		},
-//  		{
-//  			path:'rw',
-//		    	component: ren('rw'),
-//  		},
-//  		{
-//  			path:'ss',
-//		    	component: ren('ss'),
-//  		},
-//  		{
-//  			path:'xw',
-//		    	component: ren('xw'),
-//  		},
-//  		{
-//  			path:'zs',
-//		    	component: ren('zs'),
-//  		},
-//  	]
+
     },
     {
     	path:'/help',
@@ -87,6 +62,7 @@ export default new Router({
     		title:'帮助,'
     	}
     },
+    
     {
     	path:'/contact',
     	name:'contact',
@@ -95,6 +71,10 @@ export default new Router({
     		title:'联系我们'
     	}
     },
+//  {
+//  	path:'detail',
+//		component: include('news-detail'),
+//  },
     {
     	path:'/feng',
     	name:'feng',

@@ -1,7 +1,7 @@
 <template>
 	<div id="box">
 		<ul id="conntent_List">
-			<li id="show" v-for="data in datalist">
+			<li id="show" v-for="data in datalist" >
 				<img :src="data.pic_url.split(';').slice(0,1)"/>
 				<div id="content">
 					<p id="title">
@@ -25,6 +25,7 @@
 
 <script>
 	import axios from 'axios'
+	
 	export default {
 		data(){
 			return {
