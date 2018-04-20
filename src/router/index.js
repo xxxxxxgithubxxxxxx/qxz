@@ -53,6 +53,14 @@ export default new Router({
     	mete:{
     		title:'行者,'
     	}
+    },  
+    {
+    	path:'/competitions_details',
+    	name:'competitions_details',
+    	component: include('competitions_details'),
+    	mete:{
+    		title:'行者,'
+    	}
     },
      {
     	path:'/competitions_details',
@@ -68,32 +76,16 @@ export default new Router({
     	mete:{
     		title:'新闻,'
     	},
-    	children:[
-    		{
-    			path:'all',
-		    	component: ren('all'),
-    		},
-    		{
-    			path:'cp',
-		    	component: ren('cp'),
-    		},
-    		{
-    			path:'rw',
-		    	component: ren('rw'),
-    		},
-    		{
-    			path:'ss',
-		    	component: ren('ss'),
-    		},
-    		{
-    			path:'xw',
-		    	component: ren('xw'),
-    		},
-    		{
-    			path:'zs',
-		    	component: ren('zs'),
-    		},
-    	]
+
+    },
+    {
+    	path:'/detail',
+    	name:'dateil',
+    	component: ren('news-detail'),
+    	mete:{
+    		title:'新闻,'
+    	},
+
     },
     {
     	path:'/help',
@@ -103,6 +95,7 @@ export default new Router({
     		title:'帮助,'
     	}
     },
+    
     {
     	path:'/contact',
     	name:'contact',
@@ -111,6 +104,10 @@ export default new Router({
     		title:'联系我们'
     	}
     },
+//  {
+//  	path:'/detail',
+//		component: ren('news-detail'),
+//  },
     {
     	path:'/feng',
     	name:'feng',
@@ -118,6 +115,21 @@ export default new Router({
     	mete:{
     		title:'行者,'
     	}
+    },
+    {
+    	path:'/user',
+    	component: include('user'),
+    	children:[
+    		{
+    			path:'login',
+    			component: ren('login'),
+    			
+    		},
+    		{
+    			path:'register',
+    			component: ren('register'),
+    		},
+    	]
     },
     {   
       path:'*',
