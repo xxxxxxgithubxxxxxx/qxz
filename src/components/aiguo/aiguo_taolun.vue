@@ -1,6 +1,9 @@
 <template>
-	<div>
-		<ul v-for="data,key in datalist">
+	<div v-infinite-scroll="loadMore"
+  infinite-scroll-disabled="loading"
+  infinite-scroll-distance="5"
+  infinite-scroll-immediate-check="false">
+		<ul v-for="data,key in datalist" @click="hellowdist(data.id)">
 			<li class="litime">{{data.create_time}}</li>
 			<li class="liname"><img class="headimg" :src="data.user.avatar" /><span>{{data.user.username}}</span></li>
 			<!--{{data.user.avatar}}-->
@@ -12,31 +15,59 @@
 				<img v-if="!(data.pic_url.split(';')=='')" v-for="imgdata in data.pic_url.split(';').slice(0,3)" :src=imgdata />
 			</li>
 		</ul>
+		<p class="footerp" v-if="textsu"><span><mt-spinner type="fading-circle" color="rgb(100, 100, 100)":size="30"></mt-spinner></span></p>
 	</div>
 </template>
 <script>
 	import axios from 'axios';
+	import { Indicator } from 'mint-ui';
+	import { InfiniteScroll } from 'mint-ui';
+	import { Spinner } from 'mint-ui';
+	Vue.component(Spinner.name, Spinner);
+	import Vue from "vue";
 	export default {
 		data() {
 			return {
 				datalist: [],
 				imgurl: [],
-				user: []
+				user: [],
+				loading:false,
+				current:0,
+				textsu:false
 			}
 		},
 		computed: {
 
 		},
 		mounted() {
+			Indicator.open('加载中...');
 			axios.get("/api/v4/new_get_topics?start=0&count=10&channel_id=7").then(res => {
 //				console.log(res.data);
 				//				console.log(res.data.pic_url.split(';'),111);
 				this.datalist = res.data;
 				//				this.user=res.data.user;
-				console.log();
+				this.textsu=true;
+				Indicator.close();
 			}).catch(function(err) {
 				console.log(err);
 			})
+		},
+		methods:{
+			loadMore(){
+				this.current+=10;
+				if(this.current>300){
+					this.loading=true;
+					this.textsu=false;
+					return;
+				}
+				axios.get(`/api/v4/new_get_topics?start=${this.current}&count=10&channel_id=7`).then(res=>{
+				this.datalist=[...this.datalist,...res.data];//这里合并两个数组
+			})
+			},
+			hellowdist:function(id){
+				//导航跳转
+				this.$router.push(`/datalist?id=${id}`);
+			}
 		}
 	}
 </script>
@@ -59,6 +90,15 @@
 	div {
 		font-size: 0.12rem;
 		background: #ccc;
+		.footerp{
+				background: #fff;
+				text-align: center;
+				span{
+					display: block;
+					width: 0.5rem;
+					margin: 0 auto;
+				}
+			}
 		ul {
 			background: #fff;
 			margin-bottom: 0.05rem;

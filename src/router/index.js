@@ -6,6 +6,10 @@ return () => import('@/components/' + path)
 function ren(path) {
 return () => import('@/components/new/' + path)
 }
+function aiguo(path){
+return () => import('@/components/aiguo/'+path)
+}
+
 Vue.use(Router)
 
 
@@ -20,6 +24,11 @@ export default new Router({
     	mete:{
     		title:'行者App,'
     	}
+    },
+    {
+    	path:'/datalist',
+    	name:'datalist',
+    	component: aiguo('datalist')
     },
     {
     	path:'/lushu',
@@ -41,6 +50,13 @@ export default new Router({
     	path:'/competitions',
     	name:'competitions',
     	component: include('competitions'),
+    	mete:{
+    		title:'行者,'
+    	}
+    },
+     {
+    	path:'/competitions_details',
+    	component: include('competitions_details'),
     	mete:{
     		title:'行者,'
     	}
