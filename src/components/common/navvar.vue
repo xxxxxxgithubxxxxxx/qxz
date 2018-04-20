@@ -31,7 +31,7 @@
 			background: #282828;
 			color: #fff;
 			position: fixed;
-			z-index: 2;
+			z-index: 3;
 			width: 100%;
 			top: 0;
 			left:0;

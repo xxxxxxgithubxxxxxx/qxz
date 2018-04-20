@@ -34,7 +34,7 @@
 			width:2.5rem;
 			height:100%;
 			position: fixed;
-			z-index: 2;
+			z-index: 3;
 			top: 0.25rem;
 			left: 0;
 			background:#282828;
