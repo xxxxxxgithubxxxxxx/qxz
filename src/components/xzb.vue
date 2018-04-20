@@ -18,7 +18,7 @@
 		<router-view></router-view>
 	</div>
 </template>	
-<script>
+<script type="text/javascript">
 import aiguo_all from '../components/aiguo/aiguo_all';
 import aiguo_jiaoyi from '../components/aiguo/aiguo_jiaoyi';
 import aiguo_taolun from '../components/aiguo/aiguo_taolun';
@@ -32,9 +32,9 @@ export default{
 		}
 	},
 	computed:{
-
 	},
 	methods:{
+		
 	},
 	components:{
 	aiguo_all,

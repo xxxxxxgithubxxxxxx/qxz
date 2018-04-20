@@ -1,25 +1,5 @@
 <template>
 	<div id="home">
-		
-		
- <!--<el-button>默认按钮</el-button>
-  <el-button type="primary">主要按钮</el-button>
-  <el-button type="success">成功按钮</el-button>
-  <el-button type="info">信息按钮</el-button>
-  <el-button type="warning">警告按钮</el-button>
-  <el-button type="danger">危险按钮</el-button>
-  <el-button type="primary" :loading="true"></el-button>
-   <div class="block">
-    <span class="demonstration">默认</span>
-    <el-date-picker
-      v-model="value6"
-      type="daterange"
-      range-separator="至"
-      start-placeholder="开始日期"
-      end-placeholder="结束日期">
-    </el-date-picker>
-  </div>
- -->
 		<header>
 			<h1>行者，专业户外运动软件</h1>
 			<p>当前行者用户运动总里程</p>
@@ -62,7 +42,8 @@
 		</aside>
 		<footer class="footer">
 			<i class="play-button iconfont icon-play" id="playButtom" title="播放"></i>
-			<video class="video"  id="video"  src="http://oibjq9rlf.qnssl.com/video-Xingzhe_100s_FINAL_720P.mp4" poster="//cdn.bi-ci.com/vue_static/images/video_poster.jpg" ></video>
+			<video class="video"  id="video1" src="http://oibjq9rlf.qnssl.com/video-Xingzhe_100s_FINAL_720P.mp4" type="video/m4v" poster="//cdn.bi-ci.com/vue_static/images/video_poster.jpg" >
+			</video>
 			<p>Copyright © 2015 鲁ICP备13005877号-1</p>
 		</footer>
 	</div>
@@ -73,7 +54,8 @@ export default{
 	data(){
 		return{
 			num:0,
-			value6:''
+			value6:'',
+			isshow:true
 		}
 	},
 	computed:{
@@ -85,6 +67,13 @@ export default{
 				$(this).find("ul").stop().animate({opacity:'1'},'slow').show()
 				.end().siblings().find("ul").stop().animate({opacity:'0'},"slow");
 			})
+			var num2=setInterval(function(){
+				axios.get("/api/v3/total_distance/").then(res=>{
+					this.num=res.data.total_distance;
+					return this.num;
+					console.log(this.num);
+				})
+			},5000)
 		})
 	},
 	computed:{
@@ -93,16 +82,7 @@ export default{
 		}
 	},
 	updated(){
-		/*$(function(){
-			setInterval(function(){
-				axios.get("/api/v3/total_distance/").then(res=>{
-					this.num=res.data.total_distance;
-					console.log(this.num);
-				}).catch(function(err){
-					console.log(err);
-				})
-			},5000)
-		})*/
+		console.log(this.num);
 	}
 	
 }
