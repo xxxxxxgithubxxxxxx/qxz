@@ -38,8 +38,6 @@ export default{
 	mounted(){
 			axios.get("/api/v4/competition_detail?competition_id="+this.$route.query.id).then(res=>{
 				this.datalist=res.data.data;	
-				console.log(this.datalist)
-				
 			}).catch(err=>{
 				console.log(err);
 			})

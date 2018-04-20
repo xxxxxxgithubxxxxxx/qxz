@@ -1,6 +1,6 @@
 <template>
 	<div id="bg_box">
-	<ul id="top_list">
+	<ul id="top_list" @click="list_paging" v-if="top_list">
 		<li>行者报名</li>
 		<li>骑行</li>
 		<li>越野跑</li>
@@ -39,7 +39,9 @@ export default{
 			loading:false,
 			i:0,
 			url:null,
-			jiazai:"数据加载中...."
+			jiazai:"数据加载中....",
+			top_list:true,
+			top_list_value:null
 		}
 	},
 	mounted(){
@@ -67,26 +69,64 @@ export default{
 		      }
 		    return Y+'-'+M+'-'+day;
 		},
-		loadMore() {
+		loadMore:function(){
 			var old_datalist=this.datalist;
 			if(old_datalist.length){
-				this.url="/api/v4/competitions_done/?limit=10&page="+this.i
+				this.url="/api/v4/competitions_done/?limit=10&page="+this.i;
 			}else{
 				this.url="/api/v4/competitions_processing/?limit=500&page=0";
 			}
-			axios.get(this.url).then(res=>{
-				this.datalist=res.data.data;
-				this.datalist=[...old_datalist,...this.datalist];
-				this.i++;
-				if(res.data.data.length==0){
-					this.loading=true;
-					this.jiazai="没有跟多数据"
-				}
-			}).catch(err=>{
-				console.log(err);
-			})
-			
+			if(!this.top_list.value){
+				axios.get(this.url).then(res=>{
+					this.datalist=res.data.data;
+					this.datalist=[...old_datalist,...this.datalist];
+					this.i++;
+					if(res.data.data.length==0){
+						this.loading=true;
+						this.jiazai="没有跟多数据"
+					}
+				}).catch(err=>{
+					console.log(err);
+				})
+			}else{
+				old_datalist=[];
+				axios.get(this.url).then(res=>{
+					for(var i=0;i<res.data.data.length;i++){
+						if(this.top_list_value==res.data.data[i].com_sport_type){
+							this.datalist.push(res.data.data[i]);
+						}
+					}
+					console.log(old_datalist,"-----",this.datalist,res.data.data[1]);
+					this.datalist=[...old_datalist,...this.datalist];
+					this.i++;
+					if(res.data.data.length==0){
+						this.loading=true;
+						this.jiazai="没有跟多数据"
+					}
+				}).catch(err=>{
+					console.log(err);
+				})
+				
+			}	
+//			axios.get(this.url).then(res=>{
+//				this.datalist=res.data.data;
+//				this.datalist=[...old_datalist,...this.datalist];
+//				this.i++;
+//				
+//				if(res.data.data.length==0){
+//					this.loading=true;
+//					this.jiazai="没有跟多数据"
+//				}
+//			}).catch(err=>{
+//				console.log(err);
+//			})
+		
+		},
+		list_paging(ev){
+			this.top_list=false;
+			this.top_list_value=ev.target.innerText;
 		}
+			
 	},
 	computed:{
 		
