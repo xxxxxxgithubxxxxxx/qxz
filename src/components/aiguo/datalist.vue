@@ -8,8 +8,7 @@
 "> 
 			<ul>
 				<li>{{user.username}}</li>
-				<li>{{zuozhelist.create_time
-}}</li>
+				<li>{{zuozhelist.create_time}}</li>
 			</ul>
 		</header>
 		<!--内容区域-->
