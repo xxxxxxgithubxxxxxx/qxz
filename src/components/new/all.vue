@@ -1,6 +1,6 @@
 <template>
-	<div id="box">
-		<ul id="conntent_List">
+	<div id="box" >
+		<ul id="conntent_List" v-infinite-scroll="loadMore">
 			<li id="show" v-for="data in datalist" @click="hellowdist(data.id)">
 				
 				<img :src="data.pic_url.split(';').slice(0,1)" />
@@ -26,24 +26,39 @@
 
 <script>
 	import axios from 'axios'
+	import { Indicator } from 'mint-ui';
 	
 	export default {
 		data(){
 			return {
 				datalist:[],
+				current:0,
 				
 			}
 		},
 		mounted(){
+			Indicator.open('加载中...');
+			
 			axios.get("/api/v4/new_get_topics?start=0&count=10&channel_id=0").then(res => {
 				this.datalist = res.data;
 				console.log(res)
+				Indicator.close();
 				
 			}).catch(err=>{
 				console.log(err)
 			});
 		},
 		methods:{
+			loadMore(){
+				this.current+=10;
+				if(this.current>300){
+					
+					return;
+				}
+				axios.get(`/api/v4/new_get_topics?start=${this.current}&count=10&channel_id=12`).then(res=>{
+				this.datalist=[...this.datalist,...res.data];//这里合并两个数组
+			})
+			},
 			hellowdist(id){
 				console.log(id);
 				this.$router.push(`/detail?id=${id}`)
