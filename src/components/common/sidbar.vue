@@ -38,6 +38,7 @@
 			left: 0;
 			background:#282828;
 			color: #000;
+			z-index: 2;
 			ul{
 				li{
 					list-style: none;
