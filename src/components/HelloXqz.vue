@@ -67,22 +67,22 @@ export default{
 				$(this).find("ul").stop().animate({opacity:'1'},'slow').show()
 				.end().siblings().find("ul").stop().animate({opacity:'0'},"slow");
 			})
-			var num2=setInterval(function(){
+			/*setInterval(function(){
 				axios.get("/api/v3/total_distance/").then(res=>{
 					this.num=res.data.total_distance;
 					return this.num;
 					console.log(this.num);
 				})
-			},5000)
+			},5000)*/
 		})
 	},
 	computed:{
 		num1:function(){
-			return this.num;
+			return 3000;
 		}
 	},
 	updated(){
-		console.log(this.num);
+		console.log(num2);
 	}
 	
 }
