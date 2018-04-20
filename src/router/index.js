@@ -44,9 +44,10 @@ export default new Router({
     	mete:{
     		title:'行者,'
     	}
-    },
+    },  
     {
     	path:'/competitions_details',
+    	name:'competitions_details',
     	component: include('competitions_details'),
     	mete:{
     		title:'行者,'
