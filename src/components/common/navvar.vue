@@ -16,6 +16,7 @@
 	export default{
 		data(){
 			return{
+				name:'',
 				isShow:true,
 			}
 		},
@@ -51,6 +52,11 @@
 				span{
 					margin-left: 0.1rem;
 				}
+			}
+			p{
+				float:right;
+				margin-left: 0.1rem;
+				
 			}
 		}
 	</style> 
