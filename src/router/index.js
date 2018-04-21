@@ -22,6 +22,8 @@ let router = new Router({
     	component: include('HelloXqz'),
     	meta:{
     		title:'行者App,'
+
+    		
     	}
     },
     {
