@@ -15,15 +15,12 @@
 				</div>
 				
 				<div id="password">
-<<<<<<< HEAD
-				<input type="password" name="password"   placeholder="请输入密码" />
-=======
-				<input type="password" name="password"  placeholder="请输入密码" v-model="userpass"/>
->>>>>>> 17bddfa2908fde5ffc2b49fd444be62e90cc305b
+				
+				<input type="password" name="password"  placeholder="请输入密码" v-model="password"/>
 				</div>
 				<p v-show="showerr" id="err">{{title}}</p>
 				<div id="btn">
-					<input type="submit" name="btn" id="btn" value="登录" @click="login"/>
+					<input name="btn" id="btn" value="登录" @click="login()"/>
 				</div>
 			</form>
 			<p class="register">
@@ -50,7 +47,7 @@
 		data(){
 			return {
 				username:'',
-				userpass:'',
+				password:'',
 				showerr:false,
 				title:'用户名或者密码错误!!!'
 			}
@@ -66,21 +63,22 @@
 		        if(this.username == "" || this.password == ""){
 		            alert("请输入用户名或密码")
 		        }else{
-		            let data = {'username':this.username,'password':this.password}
+		            let data = {'email':this.username,'password':this.password}
+//		            console.log(data);
 		            /*接口请求*/
-		            axios.post('',data).then((res)=>{
-		                console.log(res)
+		            axios.post('/login11',data).then((res)=>{
+		                console.log(res.data)
 		             /*接口的传值是(-1,该用户不存在),(0,密码错误)，同时还会检测管理员账号的值*/
 		              if(res.data == 1){
-		                  this.title = "该用户不存在"
-		                  this.showerr = true
+		                  this.title = "该用户存在"
+		                  this.showerr = false
 		              }else if(res.data == 0){
 		                  this.title = "密码输入错误"
 		                  this.showerr = true
 		              }else{
 		                  this.title = "登录成功"
 		                  this.showerr = true
-		                  setCookie('username',this.username,1000*60)
+		                  setCookie('username',this.username,0)
 		                  setTimeout(function(){
 		                      this.$router.push('/home')
 		                  }.bind(this),1000)

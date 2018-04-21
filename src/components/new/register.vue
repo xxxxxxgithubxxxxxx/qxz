@@ -14,15 +14,15 @@
 					<input type="text" name="username"  placeholder="手机号" v-model="newusername"/>
 				</div>
 				
-				<!--<div id="e-mail">
-					<input type="text" name="e-mail"  placeholder="请输入邮箱" />
-				</div>-->
+				<div id="e-mail">
+					<input type="text" name="e-mail"  placeholder="请输入邮箱" v-model="email" />
+				</div>
 				<div id="password">
 				<input type="password" name="password"  placeholder="请输入密码" 
-					v-model="newuserpass"/>
+					v-model="newpassword"/>
 				</div>
 				<div id="btn">
-					<input type="submit" name="btn" id="btn" value="注册" @click="register"/>
+					<input  name="btn" id="btn" value="注册" @click="register"/>
 				</div>
 			</form>
 			<p class="register">
@@ -50,7 +50,8 @@
 		data(){
 			return {
 				newusername:'',
-				newuserpass:'',
+				newpassword:'',
+				email:''
 			}
 		},
 		methods:{
@@ -58,16 +59,18 @@
 			    if(this.newUsername == "" || this.newPassword == ""){
 			        alert("请输入用户名或密码")
 			    }else{
-			        let data = {'username':this.newUsername,'password':this.newPassword}
-			        axios.post('',data).then((res)=>{
-			            console.log(res)
-			            if(res.data == "ok"){
-			                this.tishi = "注册成功"
+			        let data = {'username':this.newusername,'email':this.email,'password':this.newpassword,}
+			        console.log(data);
+			         axios.post('/register11',data).then((res)=>{
+			            console.log(res.data);
+			            if(res.data == "1"){
+//			                this.tishi = "注册成功"
+							console.log("注册成功");
 			                this.showTishi = true
 			                this.username = ''
 			                this.password = ''
 			                 /*注册成功之后再跳回登录页*/
-			                setTimeout(function(){
+			               setTimeout(function(){
 								this.$router.push('/user/login')
 			                }.bind(this),1000)
 			            }

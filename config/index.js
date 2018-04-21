@@ -15,6 +15,16 @@ module.exports = {
     		target: 'http://www.imxingzhe.com',
     		host: 'http://www.imxingzhe.com',
     		changeOrigin: true,
+    	},
+    	'/login11':{
+    		target:"http://localhost:3000",
+    		host:'http://localhost:3000',
+    		changeOrigin:true,
+    	},
+    	'/register11':{
+    		target:"http://localhost:3000",
+    		host:'http://localhost:3000',
+    		changeOrigin:true,
     	}
         /* '/restapi/': {
               target: 'https://www.ele.me',
