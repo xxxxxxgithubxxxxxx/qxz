@@ -15,7 +15,7 @@
 				</div>
 				
 				<div id="password">
-				<input type="password" name="password"  placeholder="请输入密码" />
+				<input type="password" name="password"   placeholder="请输入密码" />
 				</div>
 				<div id="btn">
 					<input type="submit" name="btn" id="btn" value="登录" />
