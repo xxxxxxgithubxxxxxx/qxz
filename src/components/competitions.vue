@@ -23,7 +23,7 @@
 			}}</span></dd>
 		<dd class="list_keyword"><span>{{data.com_sport_type}}</span><span v-for="keyword in data.tags">{{keyword}}</span></dd>
 		<dd class="list_recommend" v-if="data.top"> 行者推荐</dd>
-		<dd class="list_enroll" v-if="data.top_index">行者报名</dd>
+		<dd class="list_enroll" v-if="!data.com_type">行者报名</dd>
 	</dl>
 	<p class="jiazai">{{jiazai}}</p>
 	</div>
@@ -31,6 +31,7 @@
 </template>
 <script>
 import axios from "axios";
+
 export default{
 	data(){
 		return{
@@ -76,11 +77,11 @@ export default{
 			}else{
 				this.url="/api/v4/competitions_processing/?limit=500&page=0";
 			}
-			if(!this.top_list.value){
 				axios.get(this.url).then(res=>{
 					this.datalist=res.data.data;
 					this.datalist=[...old_datalist,...this.datalist];
 					this.i++;
+					console.log(this.datalist);
 					if(res.data.data.length==0){
 						this.loading=true;
 						this.jiazai="没有跟多数据"
@@ -88,15 +89,24 @@ export default{
 				}).catch(err=>{
 					console.log(err);
 				})
+		},
+		list_paging(ev){
+			this.top_list=false;
+			this.top_list_value=ev.target.innerText;
+			this.datalist=[];
+			var old_datalist=this.datalist;
+			if(old_datalist.length){
+				this.url="/api/v4/competitions_done/?limit=10&page="+this.i;
 			}else{
-				old_datalist=[];
+				this.url="/api/v4/competitions_processing/?limit=500&page=0";
+			}
+			old_datalist=[];
 				axios.get(this.url).then(res=>{
 					for(var i=0;i<res.data.data.length;i++){
 						if(this.top_list_value==res.data.data[i].com_sport_type){
 							this.datalist.push(res.data.data[i]);
 						}
 					}
-					console.log(old_datalist,"-----",this.datalist,res.data.data[1]);
 					this.datalist=[...old_datalist,...this.datalist];
 					this.i++;
 					if(res.data.data.length==0){
@@ -106,25 +116,6 @@ export default{
 				}).catch(err=>{
 					console.log(err);
 				})
-				
-			}	
-//			axios.get(this.url).then(res=>{
-//				this.datalist=res.data.data;
-//				this.datalist=[...old_datalist,...this.datalist];
-//				this.i++;
-//				
-//				if(res.data.data.length==0){
-//					this.loading=true;
-//					this.jiazai="没有跟多数据"
-//				}
-//			}).catch(err=>{
-//				console.log(err);
-//			})
-		
-		},
-		list_paging(ev){
-			this.top_list=false;
-			this.top_list_value=ev.target.innerText;
 		}
 			
 	},
@@ -184,6 +175,7 @@ export default{
 		margin: 0 auto;
 		dt{
 			img{
+				height: 1.5rem;
 				width: 100%;
 			}
 		}
