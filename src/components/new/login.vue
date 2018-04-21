@@ -42,6 +42,7 @@
 	import navbar from './navbar'
 	import {setCookie,getCookie} from '../../assets/js/cookie.js'
 	import axios from 'axios';
+	import observer from '../../observer'
 	
 	export default{
 		data(){

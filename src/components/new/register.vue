@@ -11,7 +11,7 @@
 		<div id="from">
 			<form>
 				<div id="username">
-					<input type="text" name="username"  placeholder="手机号" v-model="newusername"/>
+					<input type="text" name="username"  placeholder="用户名" v-model="newusername"/>
 				</div>
 				
 				<div id="e-mail">
