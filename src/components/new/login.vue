@@ -11,19 +11,20 @@
 		<div id="from">
 			<form>
 				<div id="username">
-					<input type="text" name="username"  placeholder="手机号码/邮箱" />
+					<input type="text" name="username"  placeholder="手机号码/邮箱" v-model="username"/>
 				</div>
 				
 				<div id="password">
-				<input type="password" name="password"  placeholder="请输入密码" />
+				<input type="password" name="password"  placeholder="请输入密码" v-model="userpass"/>
 				</div>
+				<p v-show="showerr" id="err">{{title}}</p>
 				<div id="btn">
-					<input type="submit" name="btn" id="btn" value="登录" />
+					<input type="submit" name="btn" id="btn" value="登录" @click="login"/>
 				</div>
 			</form>
 			<p class="register">
 				<span id="register">
-					注册新帐号>>
+					<a href="/user/register">注册新帐号>></a>
 				</span>
 				<span id="pass">
 					找回密码
@@ -38,13 +39,52 @@
 
 <script>
 	import navbar from './navbar'
+	import {setCookie,getCookie} from '../../assets/js/cookie.js'
+	import axios from 'axios';
 	
 	export default{
 		data(){
 			return {
-				
+				username:'',
+				userpass:'',
+				showerr:false,
+				title:'用户名或者密码错误!!!'
 			}
 		},
+		mounted(){
+			 /*页面挂载获取cookie，如果存在username的cookie，则跳转到主页，不需登录*/
+		    if(getCookie('username')){
+		        this.$router.push('/home')
+		    }
+		},
+		 methods:{
+		    login(){
+		        if(this.username == "" || this.password == ""){
+		            alert("请输入用户名或密码")
+		        }else{
+		            let data = {'username':this.username,'password':this.password}
+		            /*接口请求*/
+		            axios.post('',data).then((res)=>{
+		                console.log(res)
+		             /*接口的传值是(-1,该用户不存在),(0,密码错误)，同时还会检测管理员账号的值*/
+		              if(res.data == 1){
+		                  this.title = "该用户不存在"
+		                  this.showerr = true
+		              }else if(res.data == 0){
+		                  this.title = "密码输入错误"
+		                  this.showerr = true
+		              }else{
+		                  this.title = "登录成功"
+		                  this.showerr = true
+		                  setCookie('username',this.username,1000*60)
+		                  setTimeout(function(){
+		                      this.$router.push('/home')
+		                  }.bind(this),1000)
+		              }
+		          })
+		      }
+		    }
+		  },
 		components:{
 			navbar,
 		}
@@ -100,11 +140,22 @@
 	.register{
 		margin: 0.2rem 0rem;
 		color: dodgerblue;
+		#register{
+			
+			a{
+				text-decoration: none;
+				color: dodgerblue;
+			}
+		}
 		#pass{
 			float: right;
 		}
 	}
 	#foot{
 		color: gray;
+	}
+	#err{
+		color: red;
+		margin-top: -0.1rem;
 	}
 </style>
