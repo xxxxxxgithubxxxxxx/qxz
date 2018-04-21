@@ -63,16 +63,23 @@
 			        console.log(data);
 			         axios.post('/register11',data).then((res)=>{
 			            console.log(res.data);
+						if(res.data == "-1"){
+							alert("邮箱已被注册");
+							this.newusername = '';
+			                this.newpassword = '';
+			                this.email = '';
+						}
 			            if(res.data == "1"){
 //			                this.tishi = "注册成功"
-							console.log("注册成功");
+							alert("注册成功");
 			                this.showTishi = true
-			                this.username = ''
-			                this.password = ''
+			                this.newusername = '';
+			                this.newusername = '';
+			                this.email = '';
 			                 /*注册成功之后再跳回登录页*/
 			               setTimeout(function(){
-								this.$router.push('/user/login')
-			                }.bind(this),1000)
+								this.$router.push('/user/login');
+			                }.bind(this),100)
 			            }
 			        })
 			    }

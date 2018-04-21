@@ -23,6 +23,8 @@ export default new Router({
     	component: include('HelloXqz'),
     	mete:{
     		title:'行者App,'
+
+    		
     	}
     },
     {

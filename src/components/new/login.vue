@@ -50,7 +50,7 @@
 				username:'',
 				password:'',
 				showerr:false,
-				title:'用户名或者密码错误!!!'
+				title:'用户名或者密码错误!!!',
 			}
 		},
 		mounted(){
@@ -72,18 +72,13 @@
 		                console.log(res.data)
 		             /*接口的传值是(-1,该用户不存在),(0,密码错误)，同时还会检测管理员账号的值*/
 		              if(res.data == 1){
-		                  this.title = "该用户存在"
-		                  this.showerr = false
+		                   this.$router.push('/home');
+		                   
 		              }else if(res.data == 0){
-		                  this.title = "密码输入错误"
-		                  this.showerr = true
-		              }else{
-		                  this.title = "登录成功"
-		                  this.showerr = true
-		                  setCookie('username',this.username,0)
-		                  setTimeout(function(){
-		                      this.$router.push('/home')
-		                  }.bind(this),1000)
+		                  alert("输入有误");
+		                  this.username = '';
+			              this.password = '';
+//		                  this.$router.push('/login');
 		              }
 		          })
 		      }

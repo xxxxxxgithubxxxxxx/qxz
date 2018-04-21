@@ -17,12 +17,12 @@
 		data(){
 			return{
 				name:'',
-				isShow:true,
+				isShow:true
 			}
 		},
 		mounted(){
 			observer.subscribe(function(message){
-				this.isShow = !isShow
+				this.isShow = !this.isShow
 			})
 		},
 		computed:{
