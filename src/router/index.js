@@ -13,15 +13,14 @@ return () => import('@/components/aiguo/'+path)
 Vue.use(Router)
 
 
-
-export default new Router({
+let router = new Router({
 	mode:'history',
   routes: [
     {
     	path:'/home',
     	name:'HelloXqz',
     	component: include('HelloXqz'),
-    	mete:{
+    	meta:{
     		title:'行者App,'
     	}
     },
@@ -34,7 +33,7 @@ export default new Router({
     	path:'/lushu',
     	name:'lushu',
     	component: include('lushu'),
-    	mete:{
+    	meta:{
     		title:'行者,'
     	}
     },
@@ -42,7 +41,7 @@ export default new Router({
     	path:'/xzb',
     	name:'xzb',
     	component: include('xzb'),
-    	mete:{
+    	meta:{
     		title:'行者帮,'
     	}
     },
@@ -50,7 +49,8 @@ export default new Router({
     	path:'/competitions',
     	name:'competitions',
     	component: include('competitions'),
-    	mete:{
+    	meta:{
+    		requiresAuth:true,
     		title:'行者,'
     	}
     },  
@@ -58,14 +58,8 @@ export default new Router({
     	path:'/competitions_details',
     	name:'competitions_details',
     	component: include('competitions_details'),
-    	mete:{
-    		title:'行者,'
-    	}
-    },
-     {
-    	path:'/competitions_details',
-    	component: include('competitions_details'),
-    	mete:{
+    	meta:{
+    		requiresAuth:true,
     		title:'行者,'
     	}
     },
@@ -73,7 +67,7 @@ export default new Router({
     	path:'/news',
     	name:'news',
     	component: include('news'),
-    	mete:{
+    	meta:{
     		title:'新闻,'
     	},
 
@@ -82,17 +76,16 @@ export default new Router({
     	path:'/detail',
     	name:'dateil',
     	component: ren('news-detail'),
-    	mete:{
+    	meta:{
     		title:'新闻,'
     	},
 
     },
     {
     	path:'/help',
-    	name:'help',
     	component: include('help'),
-    	mete:{
-    		title:'帮助,'
+    	meta:{
+    		requiresAuth:true,
     	}
     },
     
@@ -100,19 +93,15 @@ export default new Router({
     	path:'/contact',
     	name:'contact',
     	component: include('contact'),
-    	mete:{
+    	meta:{
     		title:'联系我们'
     	}
     },
-//  {
-//  	path:'/detail',
-//		component: ren('news-detail'),
-//  },
     {
     	path:'/feng',
     	name:'feng',
     	component: include('feng'),
-    	mete:{
+    	meta:{
     		title:'行者,'
     	}
     },
@@ -137,3 +126,23 @@ export default new Router({
     }
   ]
 })
+
+router.beforeEach((to, from, next) => {
+//获取store里面的token
+//let token = store.state.token;
+//判断要去的路由有没有requiresAuth
+if (to.meta.requiresAuth) {
+    if (false) {
+      next();
+    } else {
+      next({
+        path: '/login',
+        query: { redirect: to.fullPath } // 将刚刚要去的路由path作为参数，方便登录成功后直接跳转到该路由
+      });
+    }
+
+} else {
+    next(); 
+}
+});
+export default router
