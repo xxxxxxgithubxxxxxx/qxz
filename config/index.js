@@ -17,13 +17,13 @@ module.exports = {
     		changeOrigin: true,
     	},
     	'/login11':{
-    		target:"http://localhost:3000",
-    		host:'http://localhost:3000',
+    		target:"http://10.40.155.124:3000",
+    		host:'http://10.40.155.124:3000',
     		changeOrigin:true,
     	},
     	'/register11':{
-    		target:"http://localhost:3000",
-    		host:'http://localhost:3000',
+    		target:"http://10.40.155.124:3000",
+    		host:'http://10.40.155.124:3000',
     		changeOrigin:true,
     	}
         /* '/restapi/': {
