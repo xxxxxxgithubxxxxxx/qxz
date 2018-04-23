@@ -3,8 +3,8 @@
 			<div class="left">
 			    <slot name="iconfont"></slot>
 			</div>
-			<p v-show="true">欢迎---{{name}}</p>
-			<div class="right" v-show="true">
+			<p >欢迎---{{name}}</p>
+			<div class="right" >
 				<router-link tag='span' to='/user/login'>登录</router-link>
 				<router-link tag='span' to='/user/register'>注册</router-link>
 				<!-- <i class="iconfont icon-account"></i> -->
@@ -12,19 +12,14 @@
 		</nav>
 	</template>
 	<script>
-		import observer from '../../observer'
 	export default{
 		data(){
 			return{
 				name:'',
-				isShow:true
+				
 			}
 		},
-		mounted(){
-			observer.subscribe(function(message){
-				this.isShow = !this.isShow
-			})
-		},
+		
 		computed:{
 
 		}
