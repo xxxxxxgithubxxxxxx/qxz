@@ -58,7 +58,7 @@
 		    if(getCookie('username')){
 		        this.$router.push('/home')
 		    }
-		    observer.publish(this)
+		    observer.publish(this.username)
 		},
 		 methods:{
 		    login(){

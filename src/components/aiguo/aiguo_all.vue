@@ -60,6 +60,7 @@
 					return;
 				}
 				axios.get(`/api/v4/new_get_topics?start=${this.current}&count=10&channel_id=0`).then(res=>{
+					console.log("nihao");
 				this.datalist=[...this.datalist,...res.data];//这里合并两个数组
 				})
 			},
