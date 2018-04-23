@@ -52,7 +52,7 @@ let router = new Router({
     	name:'competitions',
     	component: include('competitions'),
     	meta:{
-    		requiresAuth:true,
+    		// requiresAuth:true,
     		title:'行者,'
     	}
     },  
@@ -61,7 +61,7 @@ let router = new Router({
     	name:'competitions_details',
     	component: include('competitions_details'),
     	meta:{
-    		requiresAuth:true,
+    		// requiresAuth:true,
     		title:'行者,'
     	}
     },
@@ -87,7 +87,7 @@ let router = new Router({
     	path:'/help',
     	component: include('help'),
     	meta:{
-    		requiresAuth:true,
+    		// requiresAuth:true
     	}
     },
     
@@ -129,22 +129,22 @@ let router = new Router({
   ]
 })
 
-router.beforeEach((to, from, next) => {
-//获取store里面的token
-//let token = store.state.token;
-//判断要去的路由有没有requiresAuth
-if (to.meta.requiresAuth) {
-    if (false) {
-      next();
-    } else {
-      next({
-        path: '/login',
-        query: { redirect: to.fullPath } // 将刚刚要去的路由path作为参数，方便登录成功后直接跳转到该路由
-      });
-    }
+// router.beforeEach((to, from, next) => {
+// //获取store里面的token
+// //let token = store.state.token;
+// //判断要去的路由有没有requiresAuth
+// if (to.meta.requiresAuth) {
+//     if (false) {
+//       next();
+//     } else {
+//       next({
+//         path: '/login',
+//         query: { redirect: to.fullPath } // 将刚刚要去的路由path作为参数，方便登录成功后直接跳转到该路由
+//       });
+//     }
 
-} else {
-    next(); 
-}
-});
+// } else {
+//     next(); 
+// }
+// });
 export default router
