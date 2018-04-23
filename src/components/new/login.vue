@@ -20,7 +20,7 @@
 				</div>
 				<p v-show="showerr" id="err">{{title}}</p>
 				<div id="btn">
-					<input name="btn" id="btn" value="登录" @click="login()"/>
+					<input type="button" name="btn" id="btn" value="登录" @click="login()"/>
 				</div>
 			</form>
 			<p class="register">

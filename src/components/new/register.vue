@@ -22,7 +22,7 @@
 					v-model="newpassword"/>
 				</div>
 				<div id="btn">
-					<input  name="btn" id="btn" value="注册" @click="register"/>
+					<input type="button" name="btn" id="btn" value="注册" @click="register"/>
 				</div>
 			</form>
 			<p class="register">
